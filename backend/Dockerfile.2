@@ -1,0 +1,25 @@
+FROM tiangolo/uwsgi-nginx-flask:python3.7-alpine3.8-2020-05-04
+
+WORKDIR /app
+
+RUN apk update 
+##    && apk --update --no-cache add build-base
+
+COPY requirements.txt /requirements.txt
+
+RUN pip install --upgrade pip
+
+RUN pip install --prefix=/install -r /requirements.txt
+
+COPY *.py .
+COPY ./data ./data
+COPY ./reservation ./reservation
+COPY flask-nginx.conf /etc/nginx/nginx.conf
+COPY flask-uwsgi.ini uwsgi.ini
+COPY flask-startup.sh /app/startup.sh
+
+RUN addgroup www-data
+RUN adduser -D www-data -G www-data
+RUN chmod +x ./startup.sh
+
+EXPOSE 80

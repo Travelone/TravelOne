@@ -22,8 +22,6 @@
 
 #config and log
 .editorconfig
-.prettierrc
-.eslintrc.json
 debug.log
 /backend/.vscode
 /backend/venv
@@ -32,3 +30,4 @@ debug.log
 backend/__*
 backend/list
 backend/travelone
+backend/env
