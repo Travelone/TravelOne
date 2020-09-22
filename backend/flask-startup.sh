@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-nginx
+#nginx -c nginx.conf
 uwsgi --ini uwsgi.ini

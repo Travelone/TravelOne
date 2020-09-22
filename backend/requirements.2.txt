@@ -10,4 +10,4 @@
 Flask==1.1.2
 flask_restful==0.3.8
 Flask-Cors==3.0.9
-uWSGI==2.0.17.1
+#uWSGI==2.0.17.1

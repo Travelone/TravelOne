@@ -1,31 +1,31 @@
 ## editors
-/.idea
-/.vscode
+*/.idea
+*/.vscode
 
 ## system files
 .DS_Store
 
 ## npm
-/node_modules/
-/npm-debug.log
+*/node_modules/
+*/npm-debug.log
 
 ## testing
-/coverage/
+*/coverage/
 
 ## temp folders
 /.tmp/
 
 # build
-/_site/
-/dist/
-/out-tsc/
+*/_site/
+*/dist/
+*/out-tsc/
 
 #config and log
 .editorconfig
 debug.log
-/backend/.vscode
-/backend/venv
-/backend/__pycache__
+backend/.vscode
+backend/venv
+backend/__pycache__
 */reservation/*
 backend/__*
 backend/list

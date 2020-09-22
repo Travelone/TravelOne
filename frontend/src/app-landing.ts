@@ -79,7 +79,7 @@ class appLanding extends LitElement {
     >
       <div class="card-content">
         <div id="left" class="column">
-          <img src=${this.resources_url + '/resource/kapal.' + obj.id + '.jpg'} />
+          <img src=${this.resources_url + '/images/kapal.' + obj.id + '.jpg'} />
         </div>
         <div id="right" class="column">
           <div>

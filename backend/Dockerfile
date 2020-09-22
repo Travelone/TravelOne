@@ -1,46 +1,36 @@
-FROM python:3.7-alpine AS base
+FROM python:3.8.5-slim-buster AS base
 
 LABEL maintainer="hendy j agusta <hendy.j.agusta@gmail.com>"
 
-# Add demo app
-# WORKDIR /app
 RUN mkdir /install
 WORKDIR /install
 
-
 COPY requirements.txt /requirements.txt
 
-
-
-RUN apk update \
-    && apk --update --no-cache add build-base 
-
-RUN apk add --no-cache \
-    nginx \
-#    python3-dev \
-    linux-headers
-
-#RUN apk add python-dev gcc linux-headers
+RUN apt update -y && apt upgrade -y
+RUN apt install -y build-essential
 
 RUN pip install --upgrade pip
 
-RUN pip install --prefix=/install -r /requirements.txt
+RUN pip install --prefix=/install -r /requirements.txt 
 
-FROM base
+FROM python:3.8.5-slim-buster
+
+LABEL maintainer="hendy j agusta <hendy.j.agusta@gmail.com>"
 
 COPY --from=base /install /usr/local
-#COPY src /app
 
 WORKDIR /app
 
 COPY *.py .
 COPY ./data ./data
 COPY ./reservation ./reservation
-COPY flask-nginx.conf /etc/nginx/nginx.conf
-COPY flask-uwsgi.ini wsgi.ini
+#RUN rm /etc/nginx/conf.d/*
+#COPY flask-nginx.conf /etc/nginx/conf.d/nginx.conf
+COPY flask-uwsgi.ini uwsgi.ini
 COPY flask-startup.sh /app/startup.sh
 
 RUN chmod +x ./startup.sh
 
-EXPOSE 80
-#CMD [ "./startup.sh" ]
+EXPOSE 5000
+CMD [ "./startup.sh" ]
