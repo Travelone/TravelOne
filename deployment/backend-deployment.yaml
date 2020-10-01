@@ -1,0 +1,30 @@
+#----------------------------------------------------------------------------------
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: travelone-backend
+  labels:
+    app: travelone-backend
+spec:
+  selector:
+    matchLabels:
+      app: travelone-backend
+#      role: master
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: travelone-backend
+#        role: master
+        tier: backend
+    spec:
+      containers:
+      - name: travelone-backend
+        image: localhost:6000/travelone_backend:latest  # or just image: redis
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 5000

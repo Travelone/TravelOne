@@ -67,7 +67,7 @@
     ]
   },
   "name": "app-travel-one",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Webcomponent app-travel-one following open-wc recommendations",
   "author": "app-travel-one",
   "license": "MIT",
@@ -86,11 +86,8 @@
     "@polymer/paper-card": "^3.0.1",
     "@vaadin/router": "^1.7.2",
     "@webcomponents/webcomponentsjs": "^2.4.3",
+    "http-server": "^0.12.3",
     "lit-element": "^2.3.0",
-    "lit-html": "^1.1.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "webpack": "^4.44.1",
-    "yarn": "^1.22.5"
+    "lit-html": "^1.1.2"
   }
 }

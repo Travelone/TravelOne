@@ -1,6 +1,7 @@
 import { Router } from '@vaadin/router';
 import './app-landing';
 import './app-reservation';
+import './app-confirmation';
 
 const outlet = document.querySelector('output');
 const router = new Router(outlet);
@@ -19,8 +20,9 @@ const renderReservation = (context: any, command: any) => {
 }
 
 const renderConfirmation = (context: any, command: any) => {
+
   const reserveDetail: any = window.localStorage.getItem(context.params.reservationCode) || '{}'
-  //console.log(context.params.reservationCode, reserveDetail)
+  //console.log(context.params.reservationCode)
   const view = command.component('app-confirmation')
   view.reservationDetail = reserveDetail
   return view
@@ -37,7 +39,7 @@ router.setRoutes([
     //component: 'app-reservation'
   },
   {
-    path: '/reservation/confirm/:reservationCode',
+    path: '/reservation/confirmation/:reservationCode',
     action: renderConfirmation
   },
 

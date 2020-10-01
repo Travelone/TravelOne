@@ -1,26 +1,9 @@
-
-#
-# Production stage.
-# This state compile get back the JavaScript code from builder stage
-# It will also install the production package only
-#
-#FROM sebp/lighttpd:latest
-#
-#RUN rm -rf /var/cache/apk/*
-#
-#RUN mkdir /var/www/localhost/htdoc/
-#
-#RUN chmod 777 /var/www/localhost/htdoc/
-#
-#ADD dist/ /var/www/localhost/htdoc/
-#
-FROM node:alpine as base 
+#FROM node:alpine as base 
+FROM alpine:edge as base
 
 WORKDIR /base
 
-RUN apk update 
-    #&& apk add lighttpd \
-    #&& rm -rf /var/cache/apk/*
+RUN apk update && apk add nodejs npm
 
 ADD . .
 
@@ -28,19 +11,14 @@ RUN npm run build
 
 FROM alpine:edge
 
+WORKDIR /app
+
 RUN apk update \
-    && apk add lighttpd \
-    && rm -rf /var/cache/apk/*
+    && apk add --update nodejs npm
 
+COPY --from=base /base/dist/ .
 
-COPY --from=base /base/dist/ /var/www/localhost/htdocs
+RUN npm install http-server
 
-RUN addgroup -S www
-RUN adduser -S www -G www
-
-COPY lighttpd.conf /etc/lighttpd/
-
-#EXPOSE 80
-
-CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
+CMD ["node_modules/http-server/bin/http-server", "-p","8000","-P","http://localhost:8000?","." ]
 

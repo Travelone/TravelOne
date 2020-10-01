@@ -135,16 +135,7 @@ class appLanding extends LitElement {
       "fare": obj.fare,
       "seats": this.searchParams.passanger
     }
-    //let reservationClicked = new CustomEvent("reservation-clicked",
-    //  {
-    //    detail: _detail_
-    //   ,
-    //    bubbles: true,
-    //    composed: true
-    //  });
-    //this.dispatchEvent(reservationClicked);
-    //console.log(window.opener)
-    //window.parent ? hdnVal = obj.uuid : '';
+
     window.localStorage.setItem(obj.uuid, JSON.stringify(_detail_))
     window.location.href = 'reservation/' + obj.uuid
   }

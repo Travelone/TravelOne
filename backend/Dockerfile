@@ -31,6 +31,7 @@ COPY flask-uwsgi.ini uwsgi.ini
 COPY flask-startup.sh /app/startup.sh
 
 RUN chmod +x ./startup.sh
+RUN chmod +wr ./reservation
 
 EXPOSE 5000
 CMD [ "./startup.sh" ]

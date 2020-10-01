@@ -43,10 +43,9 @@ export class reservation extends LitElement {
       body: JSON.stringify(this.reservationDetail)
     }).then(function (response) { return response }, function (error) { return error });
     const content = rawResponse;
-
-    console.log(content);
-    window.location.href = 'reservation/confirmation/' + this.reservationDetail.uuid
-      ;
+    const _uuid = JSON.parse(this.reservationDetail)['uuid']
+    //console.log(content,  this.reservationDetail, _uuid);
+    window.location.href = 'reservation/confirmation/' + _uuid;
 
   }
 

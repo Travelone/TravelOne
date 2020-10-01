@@ -23,6 +23,7 @@ export class reservation extends LitElement {
 
     render() {
         const res = JSON.parse(this.reservationDetail)
+        //console.log(res)
         return html`<div class="container">
       <div>
         <p class="reserveId">Reservation code: ${res.uuid}</p>

@@ -1,0 +1,38 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: travelone-resources
+  labels:
+    app: travelone-resources
+spec:
+  selector:
+    matchLabels:
+      app: travelone-resources
+#      role: master
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: travelone-resources
+#        role: master
+        tier: backend
+    spec:
+      containers:
+      - name: travelone-resources
+        image: localhost:6000/travelone_resources
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8000
+
+        livenessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /healthz
+              port: healthz
+            initialDelaySeconds: 10
+            timeoutSeconds: 3
+            periodSeconds: 2
