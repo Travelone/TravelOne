@@ -1,4 +1,4 @@
-#FROM node:alpine as base 
+# 
 FROM alpine:edge as base
 
 WORKDIR /base

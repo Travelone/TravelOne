@@ -32,3 +32,4 @@ backend/__*
 backend/list
 backend/travelone
 backend/env
+*/*.log
