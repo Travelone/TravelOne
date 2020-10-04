@@ -5,10 +5,6 @@ import './app-confirmation';
 
 const outlet = document.querySelector('output');
 const router = new Router(outlet);
-//const reserveDetail = new Array();
-//addEventListener("reservation-clicked"
-//  , (e: any) => { reserveDetail.push(e.detail); alert(`reservation-clicked: ${JSON.stringify(reserveDetail)}`); });
-
 
 const renderReservation = (context: any, command: any) => {
 
@@ -36,7 +32,6 @@ router.setRoutes([
   {
     path: '/reservation/:reservationCode',
     action: renderReservation
-    //component: 'app-reservation'
   },
   {
     path: '/reservation/confirmation/:reservationCode',

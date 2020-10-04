@@ -27,9 +27,11 @@ class appLanding extends LitElement {
         }
 
         paper-card {
+          text-align: left;
           width: 100%;
           max-width: 850px;
           margin: 15px auto 15px auto;
+          display: grid;
         }
 
         mwc-landing {
@@ -37,11 +39,7 @@ class appLanding extends LitElement {
           margin: auto;
         }
 
-        @media (max-width: 768px) {
-          paper-card {
-            width: 100%;
-          }
-        }
+
 
         .card-content {
           padding: 10px;
@@ -61,12 +59,25 @@ class appLanding extends LitElement {
         }
 
         .card-actions {
-          float: none;
+          float:none;
         }
 
         .card-actions a:link {
           text-decoration: none;
         }
+
+        .search-results {
+          display: block;
+          margin: auto;
+          text-align:center;
+        }
+
+        @media (max-width: 768px) {
+          paper-card {
+            width: 100%;
+          }
+        }
+
       `,
     ];
   }
