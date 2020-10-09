@@ -33,3 +33,4 @@ backend/list
 backend/travelone
 backend/env
 */*.log
+*/*.env

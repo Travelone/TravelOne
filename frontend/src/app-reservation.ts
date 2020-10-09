@@ -7,7 +7,7 @@ export class reservation extends LitElement {
   @property()
   reservationDetail: any = [];
 
-  restapi_url = 'http://localhost:5000';
+  RESTAPI_URL = 'http://localhost:5000';
 
   static get styles() {
     return [
@@ -34,7 +34,7 @@ export class reservation extends LitElement {
 
   async _confirmReservation(e: any) {
     //console.log('_confirmReservation');
-    const rawResponse = await fetch(this.restapi_url + '/reservation', {
+    const rawResponse = await fetch(this.RESTAPI_URL + '/reservation', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

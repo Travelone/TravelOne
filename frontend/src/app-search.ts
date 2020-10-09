@@ -1,6 +1,5 @@
 import { html, css, LitElement, customElement, property } from 'lit-element';
 import { searchParams, ISearchParams } from './app-models.js';
-import { getLocations } from './app-data.js';
 
 import '@material/mwc-button';
 import '@material/mwc-fab';
@@ -9,10 +8,7 @@ import '@material/mwc-formfield';
 import '@material/mwc-checkbox';
 import './mwc-combo';
 import { mainStyle } from './app-styles';
-
-export interface ImwcMenu extends HTMLElement {
-  open: boolean;
-}
+//import './config';
 
 @customElement('mwc-search-block')
 export class appSearchBlock extends LitElement {
@@ -31,7 +27,9 @@ export class appSearchBlock extends LitElement {
   @property()
   isFromTxtOpen: any;
 
-  search_url = 'http://localhost:5000';
+  //restapi_url = process.env.RESTAPI_URL;
+
+  restapi_url='http://localhost:5000'
 
   constructor() {
     super();
@@ -187,8 +185,11 @@ export class appSearchBlock extends LitElement {
   }
 
   async get_from() {
-    const search_url = this.search_url + '/ports?';
-    this.ports = await fetch(search_url).then(res => res.json());
+    console.log(location.hostname)
+    //const port = location.port;
+    const restapi_url = this.restapi_url + '/ports?';
+    //const restapi_url ='';
+    this.ports = await fetch(restapi_url+'/ports?').then(res => res.json());
   }
 
   _itemClicked(obj: any) {

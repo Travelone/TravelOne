@@ -2,6 +2,7 @@ import { Router } from '@vaadin/router';
 import './app-landing';
 import './app-reservation';
 import './app-confirmation';
+//import * as dotenv from "dotenv-flow";
 
 const outlet = document.querySelector('output');
 const router = new Router(outlet);

@@ -7,7 +7,6 @@ class scheduleList extends LitElement {
   render() {
     return html`
       <mwc-search-block></mwc-search-block>
-      <div></div>
     `;
   }
 }

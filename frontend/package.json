@@ -84,8 +84,10 @@
     "@material/mwc-textarea": "^0.15.0",
     "@polymer/paper-button": "^3.0.1",
     "@polymer/paper-card": "^3.0.1",
+    "@types/dotenv-flow": "^3.1.0",
     "@vaadin/router": "^1.7.2",
     "@webcomponents/webcomponentsjs": "^2.4.3",
+    "dotenv-flow": "^3.2.0",
     "http-server": "^0.12.3",
     "lit-element": "^2.3.0",
     "lit-html": "^1.1.2"

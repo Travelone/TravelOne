@@ -4,6 +4,7 @@ import '../../node_modules/@polymer/paper-card/paper-card.js';
 import '@material/mwc-button';
 import { mainStyle } from './app-styles';
 
+
 @customElement('mwc-landing')
 class appLanding extends LitElement {
   @property()
@@ -12,8 +13,8 @@ class appLanding extends LitElement {
   @property()
   searchParams: any;
 
-  resources_url = 'http://localhost:8282';
-  restapi_url = 'http://localhost:5000';
+  RESOURCES_URL = 'http://localhost:8282';
+  RESTAPI_URL = 'http://localhost:5000';
 
   static get styles() {
     return [
@@ -90,7 +91,7 @@ class appLanding extends LitElement {
     >
       <div class="card-content">
         <div id="left" class="column">
-          <img src=${this.resources_url + '/images/kapal.' + obj.id + '.jpg'} />
+          <img src=${this.RESOURCES_URL + '/images/kapal.' + obj.id + '.jpg'} />
         </div>
         <div id="right" class="column">
           <div>
@@ -128,8 +129,8 @@ class appLanding extends LitElement {
         return encodeURIComponent(k) + '=' + encodeURIComponent(e.detail[k]);
       })
       .join('&');
-    const restapi_url = this.restapi_url + '/schedule?' + url;
-    this.searchResult = await fetch(restapi_url).then(res => res.json());
+    const RESTAPI_URL = this.RESTAPI_URL + '/schedule?' + url;
+    this.searchResult = await fetch(RESTAPI_URL).then(res => res.json());
   }
 
   _clickReservation(obj: any) {
@@ -152,6 +153,7 @@ class appLanding extends LitElement {
   }
 
   render() {
+    //console.log(process.env)
     return html`
       <body>
         <mwc-search-block id="query-block"

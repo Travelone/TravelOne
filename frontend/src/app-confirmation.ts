@@ -6,8 +6,6 @@ export class reservation extends LitElement {
     @property()
     reservationDetail: any = [];
 
-    restapi_url = 'http://localhost:5000';
-
     static get styles() {
         return [
             mainStyle,
