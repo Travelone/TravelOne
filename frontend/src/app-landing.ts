@@ -40,8 +40,6 @@ class appLanding extends LitElement {
           margin: auto;
         }
 
-
-
         .card-content {
           padding: 10px;
           float: left;
@@ -153,7 +151,6 @@ class appLanding extends LitElement {
   }
 
   render() {
-    //console.log(process.env)
     return html`
       <body>
         <mwc-search-block id="query-block"
@@ -162,7 +159,6 @@ class appLanding extends LitElement {
         <div class="search-results" >   
         ${this.searchResult
         ? this.searchResult.map((obj: any, idx: number) => {
-          //console.log(obj);
           return this.cards(obj)
         })
         : ''}

@@ -20,6 +20,7 @@ node_modules/
 */_site/
 */dist/
 */out-tsc/
+*/scripts/
 
 #config and log
 .editorconfig

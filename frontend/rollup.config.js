@@ -15,6 +15,7 @@ const baseConfig = createSpaConfig({
 
   // development mode creates a non-minified build for debugging or development
   developmentMode: process.env.ROLLUP_WATCH === 'true',
+  // developmentMode: false,
   nodeResolve: { browser: true },
 
   // set to true to inject the service worker registration into your index.html

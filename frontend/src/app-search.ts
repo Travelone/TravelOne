@@ -27,9 +27,7 @@ export class appSearchBlock extends LitElement {
   @property()
   isFromTxtOpen: any;
 
-  //restapi_url = process.env.RESTAPI_URL;
-
-  restapi_url='http://localhost:5000'
+  RESTAPI_URL ='http://localhost:5000';
 
   constructor() {
     super();
@@ -187,9 +185,9 @@ export class appSearchBlock extends LitElement {
   async get_from() {
     console.log(location.hostname)
     //const port = location.port;
-    const restapi_url = this.restapi_url + '/ports?';
-    //const restapi_url ='';
-    this.ports = await fetch(restapi_url+'/ports?').then(res => res.json());
+    const RESTAPI_URL = this.RESTAPI_URL + '/ports?';
+    //const RESTAPI_URL ='';
+    this.ports = await fetch(RESTAPI_URL+'/ports?').then(res => res.json());
   }
 
   _itemClicked(obj: any) {

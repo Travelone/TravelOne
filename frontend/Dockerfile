@@ -18,7 +18,13 @@ RUN apk update \
 
 COPY --from=base /base/dist/ .
 
+COPY scripts/start.sh .
+
 RUN npm install http-server
 
-CMD ["node_modules/http-server/bin/http-server", "-p","8000","-P","http://localhost:8000?","." ]
+RUN chmod +x start.sh
+
+#CMD ["node_modules/http-server/bin/http-server", "-p","8000","-P","http://localhost:8000?","." ]
+
+CMD ["start.sh"]
 
