@@ -18,7 +18,7 @@ RUN apk update \
 
 COPY --from=base /base/dist/ .
 
-COPY scripts/start.sh .
+COPY start.sh .
 
 RUN npm install http-server
 

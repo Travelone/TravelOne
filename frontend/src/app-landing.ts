@@ -1,4 +1,4 @@
-import './app-search.js';
+import './mwc-search-block.js';
 import { LitElement, html, customElement, property, css } from 'lit-element';
 import '../../node_modules/@polymer/paper-card/paper-card.js';
 import '@material/mwc-button';

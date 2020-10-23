@@ -8,7 +8,6 @@ import '@material/mwc-formfield';
 import '@material/mwc-checkbox';
 import './mwc-combo';
 import { mainStyle } from './app-styles';
-//import './config';
 
 @customElement('mwc-search-block')
 export class appSearchBlock extends LitElement {
@@ -138,44 +137,34 @@ export class appSearchBlock extends LitElement {
     this.dispatchEvent(
       new CustomEvent('searchClicked', { detail: this.searchParams })
     );
-    //console.log(e);
   }
 
   _fromChanged(e: any, value: string) {
-    //console.log(value);
     this.searchParams.from = value;
-    //console.log(this.searchParams);
-    //console.log(value, this.searchParams?.from);
   }
 
   _toChanged(e: any, value: string) {
     this.searchParams.to = value;
-    //console.log(this.searchParams);
   }
 
   _dtDepartChanged(e: any, value: any) {
     this.searchParams.embarkDate = value;
-    //console.log(this.searchParams);
   }
 
   _chkReturnChecked() {
-    //console.log(this.dteReturnVisible);
     if (this.dteReturnVisible) {
       this.dteReturnVisible = false;
     } else {
       this.dteReturnVisible = true;
     }
-    //console.log(this.dteReturnVisible);
   }
 
   _dtReturnChanged(e: any, value: any) {
     this.searchParams.embarkDate = value;
-    //console.log(this.searchParams);
   }
 
   _setPassenger(e: any, value: Number) {
     this.searchParams.passanger = value;
-    //console.log(this.searchParams);
   }
 
   _validate(params: any) {
@@ -184,19 +173,15 @@ export class appSearchBlock extends LitElement {
 
   async get_from() {
     console.log(location.hostname)
-    //const port = location.port;
     const RESTAPI_URL = this.RESTAPI_URL + '/ports?';
-    //const RESTAPI_URL ='';
     this.ports = await fetch(RESTAPI_URL+'/ports?').then(res => res.json());
   }
 
   _itemClicked(obj: any) {
     console.log(document.getElementById(obj));
-    //document.getElementById(obj.id).value = obj.name;
   }
 
   render() {
-    //console.log(this._ports.length);
     return html`
       <link
         rel="stylesheet"
