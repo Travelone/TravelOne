@@ -64,7 +64,7 @@ export class reservation extends LitElement {
       <div class="action">
         <div class="cancel">
           <mwc-button
-            id="cancleId"
+            id="cancelId"
             label="Cancel"
             raised
             @click=${this._cancelReservation}

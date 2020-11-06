@@ -74,6 +74,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/lab": "^4.0.0-alpha.56",
+    "@material/dom": "^8.0.0",
     "@material/mwc-button": "^0.15.0",
     "@material/mwc-checkbox": "^0.15.0",
     "@material/mwc-fab": "^0.15.0",
@@ -87,8 +88,13 @@
     "@types/dotenv-flow": "^3.1.0",
     "@vaadin/router": "^1.7.2",
     "@webcomponents/webcomponentsjs": "^2.4.3",
+    "crypto": "^1.0.1",
     "http-server": "^0.12.3",
     "lit-element": "^2.3.0",
-    "lit-html": "^1.1.2"
+    "lit-html": "^1.1.2",
+    "nanoid": "^3.1.16",
+    "pwa-helpers": "^0.9.1",
+    "redux": "^4.0.5",
+    "reselect": "^4.0.0"
   }
 }

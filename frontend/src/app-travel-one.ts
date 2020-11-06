@@ -1,11 +1,16 @@
 import { Router } from '@vaadin/router';
-import './app-landing';
+import './app-home';
 import './app-reservation';
 import './app-confirmation';
 //import * as dotenv from "dotenv-flow";
 
 const outlet = document.querySelector('output');
 const router = new Router(outlet);
+
+const renderLanding = (context: any, command: any) => {
+  const view = command.component('app-home')
+  return view
+}
 
 const renderReservation = (context: any, command: any) => {
 
@@ -25,10 +30,20 @@ const renderConfirmation = (context: any, command: any) => {
   return view
 }
 
+const renderSearch = (context: any, command: any) => {
+  const view = command.component('app-search-result')
+  return view
+}
+
 router.setRoutes([
   {
     path: '/',
-    component: 'mwc-landing',
+    action: renderLanding
+  },
+
+  {
+    path: '/search/:searchCode',
+    action: renderSearch
   },
   {
     path: '/reservation/:reservationCode',

@@ -1,12 +1,15 @@
-import './mwc-search-block.js';
+import './feature/app-search-block.js';
 import { LitElement, html, customElement, property, css } from 'lit-element';
 import '../../node_modules/@polymer/paper-card/paper-card.js';
 import '@material/mwc-button';
 import { mainStyle } from './app-styles';
 
+import { connect } from 'pwa-helpers';
+import { store } from './redux/store';
 
-@customElement('mwc-landing')
-class appLanding extends LitElement {
+
+@customElement('app-home')
+class appLanding extends connect(store)(LitElement) {
   @property()
   searchResult: any;
 
@@ -141,7 +144,7 @@ class appLanding extends LitElement {
       "date": obj.date,
       "time": obj.time,
       "description": obj.description,
-      "vasselId": obj.id,
+      "vesselId": obj.id,
       "fare": obj.fare,
       "seats": this.searchParams.passanger
     }
@@ -153,9 +156,9 @@ class appLanding extends LitElement {
   render() {
     return html`
       <body>
-        <mwc-search-block id="query-block"
+        <app-search-block id="query-block"
           @searchClicked=${(e: any) => this._get_search(e)}
-        ></mwc-search-block>
+        ></app-search-block>
         <div class="search-results" >   
         ${this.searchResult
         ? this.searchResult.map((obj: any, idx: number) => {

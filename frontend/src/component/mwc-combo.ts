@@ -4,7 +4,7 @@ import '@material/mwc-list/mwc-list-item';
 import '@material/mwc-list/mwc-list';
 import { StringifyOptions } from 'querystring';
 import { ListItem } from '@material/mwc-list/mwc-list-item';
-import { mainStyle } from './app-styles';
+import { mainStyle } from '../app-styles';
 
 @customElement('mwc-combo-text')
 export class comboText extends LitElement {
@@ -61,6 +61,7 @@ export class comboText extends LitElement {
   }
 
   _filterOptions(obj: any) {
+    //console.log(this.selections)
     this._filter = obj.srcElement.value;
     if (this._filter != '') {
       const x: any = [];

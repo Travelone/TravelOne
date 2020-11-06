@@ -20,5 +20,15 @@
   <body>
     <output></output>
     <script type="module" src="./out-tsc/src/app-travel-one.js"></script>
+    <script>
+      // from:https://stackoverflow.com/questions/50407570/process-is-not-defined-error-with-polymer-and-redux 
+      // HACK(keanulee): The Redux package assumes `process` exists - mock it here before
+      // the module is loaded.
+      window.process = {
+        env: {
+          NODE_ENV: 'production'
+        }
+      };
+    </script>
   </body>
 </html>

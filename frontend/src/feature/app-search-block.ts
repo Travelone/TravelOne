@@ -1,15 +1,17 @@
 import { html, css, LitElement, customElement, property } from 'lit-element';
-import { searchParams, ISearchParams } from './app-models.js';
+import { searchParams, ISearchParams } from '../app-models.js';
+import { mainStyle } from '../app-styles';
+//import { } from '../app-models'
 
 import '@material/mwc-button';
 import '@material/mwc-fab';
 import '@material/mwc-textfield';
 import '@material/mwc-formfield';
 import '@material/mwc-checkbox';
-import './mwc-combo';
-import { mainStyle } from './app-styles';
+import '../component/mwc-combo';
 
-@customElement('mwc-search-block')
+
+@customElement('app-search-block')
 export class appSearchBlock extends LitElement {
   @property({ reflect: true })
   searchParams: any;
@@ -21,7 +23,7 @@ export class appSearchBlock extends LitElement {
   txtFromMenuVisible: any;
 
   @property()
-  ports: any;
+  ports: any ;
 
   @property()
   isFromTxtOpen: any;
@@ -39,6 +41,11 @@ export class appSearchBlock extends LitElement {
     this.isFromTxtOpen = false;
     this.addEventListener;
   }
+  
+
+  //stateChanged(state:any) {
+  //  this.ports = []
+  //}
 
   static get styles() {
     {
@@ -172,9 +179,10 @@ export class appSearchBlock extends LitElement {
   }
 
   async get_from() {
-    console.log(location.hostname)
+    //console.log(location.hostname)
     const RESTAPI_URL = this.RESTAPI_URL + '/ports?';
     this.ports = await fetch(RESTAPI_URL+'/ports?').then(res => res.json());
+    //console.log(this.ports)
   }
 
   _itemClicked(obj: any) {
