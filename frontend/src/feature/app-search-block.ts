@@ -140,7 +140,7 @@ export class appSearchBlock extends LitElement {
     console.log(e);
   }
 
-  _searchSchedule(e: any) {
+  _searchSchedule() {
     this.dispatchEvent(
       new CustomEvent('searchClicked', { detail: this.searchParams })
     );
@@ -284,7 +284,7 @@ export class appSearchBlock extends LitElement {
               raised
               label="Search"
               @click=${(e: any) => {
-        this._searchSchedule(e);
+        this._searchSchedule();
       }}
               icon="search"
             >

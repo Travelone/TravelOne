@@ -56,7 +56,7 @@ export class SearchResult {
 export interface ISearch {
   searchId: string;
   searchParams: ISearchParams,
-  searchResult: ISearchResult[]
+  searchResults: [ISearchResult]
 }
 
 export class Search {
@@ -64,7 +64,7 @@ export class Search {
     return {
       searchId: "V1StGXR8_Z5jdHi6B",
       searchParams: new searchParams(),
-      searchResult: [new SearchResult()],
+      searchResults: [new SearchResult()],
     }
   }
 }
@@ -114,8 +114,8 @@ export interface IAppState {
 export class appState {
   create() {
     return {
-      searches: [new Search()],
-      reservations: [new Reservation()],
+      searches: [],
+      reservations: [],
       events: []
     }
   }

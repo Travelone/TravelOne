@@ -3,9 +3,11 @@ import { LitElement, html, customElement, property, css } from 'lit-element';
 import '../../node_modules/@polymer/paper-card/paper-card.js';
 import '@material/mwc-button';
 import { mainStyle } from './app-styles';
+import {IAppState, appState} from './app-models'
 
 import { connect } from 'pwa-helpers';
 import { store } from './redux/store';
+import { addSearch, ADD_SEARCH } from './redux/actions'
 
 
 @customElement('app-home')
@@ -15,6 +17,9 @@ class appLanding extends connect(store)(LitElement) {
 
   @property()
   searchParams: any;
+
+  @property()
+  state: any;
 
   RESOURCES_URL = 'http://localhost:8282';
   RESTAPI_URL = 'http://localhost:5000';
@@ -119,11 +124,28 @@ class appLanding extends connect(store)(LitElement) {
     </paper-card>`;
   }
 
-  constructor() {
-    super();
+ //constructor() {
+ //   super();
+ //   this.state = new appState()
+// }
+
+  stateChanged(state:any) {
+    this.searchResult =state.searches[0]?.searchResult
   }
 
-  async _get_search(e: any) {
+  async add_search(e: any){
+    //const searchParams = e.detail
+    const url = Object.keys(e.detail)
+      .map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(e.detail[k]);
+      })
+      .join('&');
+    const RESTAPI_URL = this.RESTAPI_URL + '/schedule?' + url;
+    const searchResult = await fetch(RESTAPI_URL).then(res => res.json());
+    store.dispatch(addSearch(e.detail,searchResult))
+  }
+
+  /* async _get_search(e: any) {
     this.searchParams = e.detail
     const url = Object.keys(e.detail)
       .map(function (k) {
@@ -132,7 +154,7 @@ class appLanding extends connect(store)(LitElement) {
       .join('&');
     const RESTAPI_URL = this.RESTAPI_URL + '/schedule?' + url;
     this.searchResult = await fetch(RESTAPI_URL).then(res => res.json());
-  }
+  } */
 
   _clickReservation(obj: any) {
 
@@ -157,7 +179,8 @@ class appLanding extends connect(store)(LitElement) {
     return html`
       <body>
         <app-search-block id="query-block"
-          @searchClicked=${(e: any) => this._get_search(e)}
+
+          @searchClicked=${(e: any) => this.add_search(e)}
         ></app-search-block>
         <div class="search-results" >   
         ${this.searchResult
