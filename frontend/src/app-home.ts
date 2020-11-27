@@ -95,6 +95,7 @@ class appLanding extends connect(store)(LitElement) {
   stateChanged(state: any) {
     //console.log(state)
     this.STATE = state
+    this.requestUpdate()
 
     //this.currentTabId = state.tabId
     //this.searchResult = state.objects[state.tabId].searchResults
@@ -145,6 +146,7 @@ class appLanding extends connect(store)(LitElement) {
           .tabId=${this.STATE.tabId}
           .searchResult = ${this.STATE.objects[this.STATE.tabId] ?
         this.STATE.objects[this.STATE.tabId].searchResults : []}
+          .RESOURCES_URL=${this.RESOURCES_URL}
           @reserveClicked=${(e: any) => this.clickReservation(e)}
         >
         </app-search-cards>
