@@ -106,17 +106,15 @@ export class Reservation {
   }
 
 export interface IAppState {
-  searches: ISearch[],
-  reservations: IReservation[],
-  events: IEvent[]
+  tabId: Number,
+  objects:[]
 }
 
 export class appState {
   create() {
     return {
-      searches: [],
-      reservations: [],
-      events: []
+      tabId: 0,
+      objects:[]
     }
   }
 }

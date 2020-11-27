@@ -276,16 +276,19 @@ export class appSearchBlock extends LitElement {
               class="num-passanger"
               @change=${(e: any) => {
         this._setPassenger(e, e.srcElement.value);
-      }}
+      }
+      }
             ></mwc-textfield>
           </div>
           <div class="input btn-searchSchedule">
             <mwc-button
               raised
               label="Search"
-              @click=${(e: any) => {
-        this._searchSchedule();
-      }}
+              @click=${(e: any) => 
+                  {
+                    this._searchSchedule();
+                  }
+      }
               icon="search"
             >
             </mwc-button>

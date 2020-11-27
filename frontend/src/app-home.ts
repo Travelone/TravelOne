@@ -1,28 +1,31 @@
 import './feature/app-search-block.js';
+import './feature/app-search-cards';
 import { LitElement, html, customElement, property, css } from 'lit-element';
 import '../../node_modules/@polymer/paper-card/paper-card.js';
 import '@material/mwc-button';
 import { mainStyle } from './app-styles';
-import {IAppState, appState} from './app-models'
 
 import { connect } from 'pwa-helpers';
 import { store } from './redux/store';
 import { addSearch, ADD_SEARCH } from './redux/actions'
+import { RESOURCES_URL, RESTAPI_URL} from './app-config'
 
 
 @customElement('app-home')
 class appLanding extends connect(store)(LitElement) {
+
   @property()
   searchResult: any;
 
   @property()
-  searchParams: any;
+  searchParams: any = undefined;
 
-  @property()
-  state: any;
+  currentTabId: number =0;
 
-  RESOURCES_URL = 'http://localhost:8282';
-  RESTAPI_URL = 'http://localhost:5000';
+  RESOURCES_URL = RESOURCES_URL;
+  RESTAPI_URL = RESTAPI_URL;
+
+  STATE:any;
 
   static get styles() {
     return [
@@ -89,74 +92,30 @@ class appLanding extends connect(store)(LitElement) {
     ];
   }
 
-  cards(obj: any) {
-    return html` <paper-card
-      heading=${obj.name}
-      alt=${obj.name}
-      id=${obj.uuid}
-    >
-      <div class="card-content">
-        <div id="left" class="column">
-          <img src=${this.RESOURCES_URL + '/images/kapal.' + obj.id + '.jpg'} />
-        </div>
-        <div id="right" class="column">
-          <div>
-            <p>From: ${obj.from}</p>
-            <p>To: ${obj.to}</p>
-          </div>
-          <div>
-            <p>Time: ${obj.time}</p>
-          </div>
-          <div>
-            <p>
-              Description: ${obj.description}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="card-actions">
-        <mwc-button
-          raised
-          @click=${(e: any) => { this._clickReservation(obj) }}
-          >Reserve</mwc-button
-        >
-      </div>
-    </paper-card>`;
-  }
-
- //constructor() {
- //   super();
- //   this.state = new appState()
-// }
-
   stateChanged(state:any) {
-    this.searchResult =state.searches[0]?.searchResult
+    //console.log(state)
+    this.STATE=state
+    
+    //this.currentTabId = state.tabId
+    //this.searchResult = state.objects[state.tabId].searchResults
+    //console.log('state changed', state.tabId,state.objects[state.tabId])
   }
 
   async add_search(e: any){
-    //const searchParams = e.detail
-    const url = Object.keys(e.detail)
-      .map(function (k) {
-        return encodeURIComponent(k) + '=' + encodeURIComponent(e.detail[k]);
-      })
-      .join('&');
-    const RESTAPI_URL = this.RESTAPI_URL + '/schedule?' + url;
-    const searchResult = await fetch(RESTAPI_URL).then(res => res.json());
-    store.dispatch(addSearch(e.detail,searchResult))
+    if ( this.searchParams === undefined ) {
+      this.searchParams = e.detail
+      const url = Object.keys(e.detail)
+        .map(function (k) {
+          return encodeURIComponent(k) + '=' + encodeURIComponent(e.detail[k]);
+        })
+        .join('&');
+      const RESTAPI_URL = this.RESTAPI_URL + '/schedule?' + url;
+      const searchResult = await fetch(RESTAPI_URL).then(res => res.json());
+      store.dispatch(addSearch(e.detail,searchResult))
+      }
   }
 
-  /* async _get_search(e: any) {
-    this.searchParams = e.detail
-    const url = Object.keys(e.detail)
-      .map(function (k) {
-        return encodeURIComponent(k) + '=' + encodeURIComponent(e.detail[k]);
-      })
-      .join('&');
-    const RESTAPI_URL = this.RESTAPI_URL + '/schedule?' + url;
-    this.searchResult = await fetch(RESTAPI_URL).then(res => res.json());
-  } */
-
-  _clickReservation(obj: any) {
+  clickReservation(obj: any) {
 
     const href = 'reservation/' + obj.uuid
     const _detail_ = {
@@ -176,19 +135,19 @@ class appLanding extends connect(store)(LitElement) {
   }
 
   render() {
+    console.log(this.STATE)
     return html`
       <body>
         <app-search-block id="query-block"
-
           @searchClicked=${(e: any) => this.add_search(e)}
         ></app-search-block>
-        <div class="search-results" >   
-        ${this.searchResult
-        ? this.searchResult.map((obj: any, idx: number) => {
-          return this.cards(obj)
-        })
-        : ''}
-        </div>
+        <app-search-cards
+          .tabId=${this.STATE.tabId}
+          .searchResult = ${this.STATE.objects[this.STATE.tabId]?
+                this.STATE.objects[this.STATE.tabId].searchResults:[]}
+          @reserveClicked=${(e:any) => this.clickReservation(e)}
+        >
+        </app-search-cards>
       </body>
     `;
   }
