@@ -4,19 +4,19 @@ import { mainStyle } from '../app-styles';
 
 @customElement('app-search-cards')
 class appSearchCards extends LitElement {
-    @property()
-    searchResult: any;
+  @property()
+  searchResult: any;
 
-    @property()
-    tabId:any;
+  @property()
+  tabId: any;
 
-    @property()
-    RESOURCES_URL: any;
+  @property()
+  RESOURCES_URL: any;
 
-    static get styles() {
-        return [
-            mainStyle,
-            css`        
+  static get styles() {
+    return [
+      mainStyle,
+      css`        
             paper-card {
                 text-align: left;
                 width: 100%;
@@ -35,22 +35,22 @@ class appSearchCards extends LitElement {
                 height: 100px;
             }
               `
-        ]
-    }
+    ]
+  }
 
-    constructor(){
-        super()
-        this.tabId=0;
-    }
+  constructor() {
+    super()
+    this.tabId = 0;
+  }
 
-    _clickReserve(obj: any) {
-        this.dispatchEvent(
-            new CustomEvent('reserveClicked', { detail:obj})
-        );
-    }
+  _clickReserve(obj: any) {
+    this.dispatchEvent(
+      new CustomEvent('reserveClicked', { detail: obj })
+    );
+  }
 
-    cards(obj: any) {
-        return html` <paper-card
+  cards(obj: any) {
+    return html` <paper-card
           heading=${obj.name}
           alt=${obj.name}
           id=${obj.uuid}
@@ -82,21 +82,21 @@ class appSearchCards extends LitElement {
             >
           </div>
         </paper-card>`;
-      }
-    
+  }
 
-    render() {
-        console.log('cards',this.searchResult)
-        return html`
+
+  render() {
+    //console.log('cards', this.searchResult)
+    return html`
           <body>
             <div class="search-results" >   
-                ${ ( (this.searchResult !== "undefined")?
-                    this.searchResult.map((obj: any, idx: number) => {
-                    return this.cards(obj)
-                    } ):'')
-                }
+                ${((this.searchResult !== undefined) ?
+        this.searchResult.map((obj: any, idx: number) => {
+          return this.cards(obj)
+        }) : '')
+      }
             </div>
           </body>
         `;
-      }
+  }
 }

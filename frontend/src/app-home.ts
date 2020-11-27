@@ -8,7 +8,7 @@ import { mainStyle } from './app-styles';
 import { connect } from 'pwa-helpers';
 import { store } from './redux/store';
 import { addSearch, ADD_SEARCH } from './redux/actions'
-import { RESOURCES_URL, RESTAPI_URL} from './app-config'
+import { RESOURCES_URL, RESTAPI_URL } from './app-config'
 
 
 @customElement('app-home')
@@ -17,15 +17,15 @@ class appLanding extends connect(store)(LitElement) {
   @property()
   searchResult: any;
 
-  @property()
-  searchParams: any = undefined;
+  //@property()
+  searchParams = undefined;
 
-  currentTabId: number =0;
+  currentTabId: number = 0;
 
   RESOURCES_URL = RESOURCES_URL;
   RESTAPI_URL = RESTAPI_URL;
 
-  STATE:any;
+  STATE: any;
 
   static get styles() {
     return [
@@ -92,27 +92,27 @@ class appLanding extends connect(store)(LitElement) {
     ];
   }
 
-  stateChanged(state:any) {
+  stateChanged(state: any) {
     //console.log(state)
-    this.STATE=state
-    
+    this.STATE = state
+
     //this.currentTabId = state.tabId
     //this.searchResult = state.objects[state.tabId].searchResults
     //console.log('state changed', state.tabId,state.objects[state.tabId])
   }
 
-  async add_search(e: any){
-    if ( this.searchParams === undefined ) {
-      this.searchParams = e.detail
-      const url = Object.keys(e.detail)
-        .map(function (k) {
-          return encodeURIComponent(k) + '=' + encodeURIComponent(e.detail[k]);
-        })
-        .join('&');
-      const RESTAPI_URL = this.RESTAPI_URL + '/schedule?' + url;
-      const searchResult = await fetch(RESTAPI_URL).then(res => res.json());
-      store.dispatch(addSearch(e.detail,searchResult))
-      }
+  async add_search(e: any) {
+    //if (this.searchParams === undefined) {
+    //  this.searchParams = e.detail
+    const url = Object.keys(e.detail)
+      .map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(e.detail[k]);
+      })
+      .join('&');
+    const RESTAPI_URL = this.RESTAPI_URL + '/schedule?' + url;
+    const searchResult = await fetch(RESTAPI_URL).then(res => res.json());
+    store.dispatch(addSearch(e.detail, searchResult))
+    //}
   }
 
   clickReservation(obj: any) {
@@ -127,7 +127,7 @@ class appLanding extends connect(store)(LitElement) {
       "description": obj.description,
       "vesselId": obj.id,
       "fare": obj.fare,
-      "seats": this.searchParams.passanger
+      //  "seats": this.searchParams.passanger
     }
 
     window.localStorage.setItem(obj.uuid, JSON.stringify(_detail_))
@@ -143,9 +143,9 @@ class appLanding extends connect(store)(LitElement) {
         ></app-search-block>
         <app-search-cards
           .tabId=${this.STATE.tabId}
-          .searchResult = ${this.STATE.objects[this.STATE.tabId]?
-                this.STATE.objects[this.STATE.tabId].searchResults:[]}
-          @reserveClicked=${(e:any) => this.clickReservation(e)}
+          .searchResult = ${this.STATE.objects[this.STATE.tabId] ?
+        this.STATE.objects[this.STATE.tabId].searchResults : []}
+          @reserveClicked=${(e: any) => this.clickReservation(e)}
         >
         </app-search-cards>
       </body>
