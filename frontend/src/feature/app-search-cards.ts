@@ -16,25 +16,45 @@ class appSearchCards extends LitElement {
   static get styles() {
     return [
       mainStyle,
-      css`        
-            paper-card {
+      css`          
+          mwc-button {
+            --mdc-theme-primary: var(--search-block-theme-primary);
+            --mdc-theme-on-primary: var(--search-block-theme-on-primary);
+            --mdc-theme-secondary: var(--search-block-theme-primary);
+            --mdc-theme-on-secondary: var(--search-block-theme-on-primary);
+             }
+  
+          paper-card {
                 text-align: left;
                 width: 100%;
                 max-width: 850px;
                 margin: 15px auto 15px auto;
                 display: grid;
               }
-            .card-content {
+          .card-content {
                 padding: 10px;
                 float: left;
             }
 
-            .card-content img {
+          .card-content img {
                 margin: auto;
                 width: 100px;
                 height: 100px;
             }
-              `
+            
+          .column {
+                padding-left: 2%;
+                float: left;
+                width: 44%;
+            }
+
+          .card-actions {
+                float:none;
+            }
+
+          .card-actions a:link {
+                text-decoration: none;
+            }`
     ]
   }
 

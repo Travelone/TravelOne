@@ -38,19 +38,6 @@ class appLanding extends connect(store)(LitElement) {
           --mdc-theme-on-secondary: var(--search-block-theme-on-primary);
         }
 
-        paper-card {
-          text-align: left;
-          width: 100%;
-          max-width: 850px;
-          margin: 15px auto 15px auto;
-          display: grid;
-        }
-
-        mwc-landing {
-          align-content: center;
-          margin: auto;
-        }
-
         .card-content {
           padding: 10px;
           float: left;
@@ -76,14 +63,8 @@ class appLanding extends connect(store)(LitElement) {
           text-decoration: none;
         }
 
-        .search-results {
-          display: block;
-          margin: auto;
-          text-align:center;
-        }
-
         @media (max-width: 768px) {
-          paper-card {
+          app-search-cards {
             width: 100%;
           }
         }
@@ -136,7 +117,7 @@ class appLanding extends connect(store)(LitElement) {
   }
 
   render() {
-    console.log(this.STATE)
+    //console.log(this.STATE)
     return html`
       <body>
         <app-search-block id="query-block"
