@@ -10,7 +10,7 @@
     "test:watch": "concurrently --kill-others --names tsc,karma \"npm run tsc:watch\" \"karma start --auto-watch=true --single-run=false\"",
     "build": "rimraf dist && tsc && rollup -c rollup.config.js",
     "start:build": "npm run build && es-dev-server --root-dir dist --app-index index.html --open --compatibility none",
-    "start": "concurrently --kill-others --names tsc,es-dev-server \"npm run tsc:watch\" \"es-dev-server --app-index index.html --node-resolve --open --watch\"",
+    "start": "concurrently --kill-others --names tsc,es-dev-server \"npm run tsc:watch\" \"es-dev-server --app-index index.html --open --watch\"",
     "start:test": "concurrently --kill-others --names tsc,es-dev-server \"npm run tsc:watch\" \"es-dev-server --app-index text.html --node-resolve --open --watch\"",
     "tsc:watch": "tsc --watch",
     "sass": "dart-sass src/style.scss build.css -I node_modules"
@@ -27,7 +27,7 @@
     "concurrently": "^5.1.0",
     "dart-sass": "^1.25.0",
     "deepmerge": "^3.2.0",
-    "es-dev-server": "^1.5.0",
+    "web-dev-server": "^3.0.22",
     "eslint": "7.2.0",
     "eslint-config-airbnb": "18.2.0",
     "eslint-config-prettier": "^6.11.0",
@@ -43,6 +43,9 @@
     "rollup": "^2.3.4",
     "tslib": "^1.10.0",
     "typescript": "^3.8.3"
+  },
+  "browser": {
+    "crypto": false
   },
   "eslintConfig": {
     "extends": [
@@ -92,10 +95,11 @@
     "http-server": "^0.12.3",
     "lit-element": "^2.3.0",
     "lit-html": "^1.1.2",
-    "nanoid": "^3.1.16",
+    "nanoid": "^3.1.20",
     "pwa-helpers": "^0.9.1",
     "redux": "^4.0.5",
     "reselect": "^4.0.0",
+    "web-dev-server": "^3.0.22",
     "yarn": "^1.22.10"
   }
 }

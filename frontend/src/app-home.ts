@@ -7,8 +7,10 @@ import { mainStyle } from './app-styles';
 
 import { connect } from 'pwa-helpers';
 import { store } from './redux/store';
-import { addSearch, ADD_SEARCH } from './redux/actions'
+import { addSearch } from './redux/actions'
 import { RESOURCES_URL, RESTAPI_URL } from './app-config'
+import {nanoid} from 'nanoid'
+//import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
 
 
 @customElement('app-home')
@@ -74,7 +76,8 @@ class appLanding extends connect(store)(LitElement) {
   }
 
   stateChanged(state: any) {
-    //console.log(state)
+    console.log('nanoid',nanoid())
+    
     this.STATE = state
     this.requestUpdate()
 
