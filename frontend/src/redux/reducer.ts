@@ -5,7 +5,7 @@ import {ADD_SEARCH,ADD_RESERVATION,ADD_CONFIRMATION} from './actions';
 
 const INITIAL_STATE= {
     tabId: 0,
-    objects: [{}]
+    objects:[{}]
 };
 
 var search : {[id:string]:{
@@ -16,13 +16,12 @@ var search : {[id:string]:{
 var reservation : {[id:string]:{detail:any}}
 
 export function rootReducer (state=INITIAL_STATE,action:any) {
-    const newTabId=state.objects.keys.length + 1
     switch(action.type){
         case ADD_SEARCH:
             return { 
-                tabId: newTabId,
+                tabId: action.search.Id,
                 objects: [...state.objects
-                    , search[newTabId.toString()]={
+                    , search[action.search.Id]={
                         searchParams: action.search.Params,
                         searchResults: action.search.Results
                 } 
@@ -30,13 +29,16 @@ export function rootReducer (state=INITIAL_STATE,action:any) {
             }
         case ADD_RESERVATION:
             return {
-                tabId: newTabId,
+                tabId: action.detail.Id,
                 objects: [...state.objects
-                    , reservation[newTabId.toString()] = {...action.details}]
+                    , reservation[action.detail.Id] = {...action.details}]
             }
         case ADD_CONFIRMATION:
+            const reserve:any = state.objects[action.detail.id]
+            reserve.confirm =true 
+            delete state.objects[action.detail.id]
             return {
-                tabId: newTabId,
+                tabId: action.detail.Id,
                 objects: [...state.objects,action.details]
             }
         default :

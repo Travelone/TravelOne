@@ -1,4 +1,5 @@
 import {ISearchParams,ISearchResult} from '../app-models';
+import {nanoid} from 'nanoid'
 
 export const ADD_SEARCH = 'ADD_SEARCH';
 export const ADD_RESERVATION = 'ADD_RESERVATION';
@@ -9,7 +10,7 @@ export const addSearch = (searchParams:ISearchParams
     return {
         type: ADD_SEARCH,
         search: {
-            Id: "V1StGXR8_Z5jdHi6B",
+            Id: nanoid(),
             Params: searchParams,
             Results: searchResults
         }
