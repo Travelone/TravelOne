@@ -63,14 +63,14 @@ class appSearchCards extends LitElement {
     this.tabId = 0;
   }
 
-  _clickReserve(obj: any) {
-    this.dispatchEvent(
-      new CustomEvent('reserveClicked', { detail: obj })
-    );
-  }
-
-  cards(obj: any) {
-    return html` <paper-card
+  cards(e: any) {
+    var obj={
+      tabId:this.tabId,
+      ...e
+    }
+    //console.log(e,obj)
+    return html` 
+        <paper-card
           heading=${obj.name}
           alt=${obj.name}
           id=${obj.uuid}
@@ -94,12 +94,11 @@ class appSearchCards extends LitElement {
               </div>
             </div>
           </div>
-          <div class="card-actions">
-            <mwc-button
-              raised
-              @click=${(e: any) => { this._clickReserve(obj) }}
+          <div class="card-actions"><a href=${"reservation/"+obj.uuid}>
+            <mwc-button 
               >Reserve</mwc-button
             >
+            </a>
           </div>
         </paper-card>`;
   }
@@ -111,10 +110,11 @@ class appSearchCards extends LitElement {
           <body>
             <div class="search-results" >   
                 ${((this.searchResult !== undefined) ?
-        this.searchResult.map((obj: any, idx: number) => {
-          return this.cards(obj)
-        }) : '')
-      }
+                    this.searchResult.map((obj: any, idx: number) => 
+                    {
+                      return this.cards(obj)
+                    }) : '')
+                  }
             </div>
           </body>
         `;

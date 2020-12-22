@@ -4,14 +4,14 @@ import { nanoid } from 'nanoid';
 export interface ISearchParams {
   from: string;
   to: string;
-  embarkDate: Date;
+  embarkDate: any;
   passenger: number;
   return: boolean;
-  returnDate?: Date;
+  returnDate?: any;
 }
 
 export class searchParams {
-  create() {
+  create():ISearchParams {
     return {
       from: '',
       to: '',
@@ -36,44 +36,16 @@ export interface ISearchResult {
   fare: number 
 }
 
-export class SearchResult {
-  create() {
-    return {
-      id : 0,
-      uuid : "",
-      from : "",
-      to : "",
-      date : "",
-      time : "",
-      name : "",
-      description : "",
-      avail : 1,
-      fare: 0 
-    }
-  }
-}
-
-export interface ISearch {
-  searchId: string;
-  searchParams: ISearchParams,
-  searchResults: [ISearchResult]
-}
-
-export class Search {
-  create(){
-    return {
-      searchId: "V1StGXR8_Z5jdHi6B",
-      searchParams: new searchParams(),
-      searchResults: [new SearchResult()],
-    }
-  }
-}
+export interface ISearch {[id:string]:{
+  searchParams:ISearchParams,
+  searchResults:ISearchResult[]
+}}
 
 export interface IEvent{
   event: string
 }
 
-export interface IReservation {
+export interface IReservation {[id:string]:{
   uuid : string,
   from : string,
   to : string,
@@ -85,36 +57,10 @@ export interface IReservation {
   fare : number,
   seats: number,
   confirm: boolean
-}
-
-export class Reservation {
-  create(){
-    return {
-      uuid : "",
-      from : "",
-      to : "",
-      date : "",
-      time : "",
-      name : "",
-      description : "",
-      vesselId: "",
-      fare : 0,
-      seats: 0,
-      confirm: false
-    }
-    }
-  }
+}}
 
 export interface IAppState {
   tabId: Number,
-  objects:[]
+  objects:object
 }
 
-export class appState {
-  create() {
-    return {
-      tabId: 0,
-      objects:[]
-    }
-  }
-}

@@ -1,13 +1,24 @@
 import { LitElement, customElement, html, property, css } from 'lit-element';
 import '@material/mwc-button';
 import { mainStyle } from './app-styles';
+import { BaseView } from './base-view';
+import { RESTAPI_URL } from './app-config'
+import { IReservation} from './app-models'
+
+import { connect } from 'pwa-helpers';
+import { Store } from './redux/store';
+
 
 @customElement('app-reservation')
-export class reservation extends LitElement {
-  @property()
+export class reservation extends connect(Store) (BaseView) {
+  //@property()
   reservationDetail: any = [];
 
-  RESTAPI_URL = 'http://localhost:5000';
+  reservationCode:string='';
+
+  RESTAPI_URL = RESTAPI_URL;
+
+  STATE:any;
 
   static get styles() {
     return [
@@ -28,7 +39,20 @@ export class reservation extends LitElement {
     ];
   }
 
-  firstUpdated() { }
+  stateChanged(state: any) {
+    this.STATE = state
+    
+    const res = state.objects[state.tabId].searchResults
+    const _res = this.reservationCode
+    const reservationDetail = res.filter(
+      function(sched:any) {return sched.uuid == _res } )
+    //console.log(reservationDetail[0])
+    if (this.reservationDetail !== reservationDetail[0]){
+      this.reservationDetail = reservationDetail[0]
+      //this.requestUpdate()
+    }
+
+  }
 
   _cancelReservation(e: any) { }
 
@@ -50,7 +74,9 @@ export class reservation extends LitElement {
   }
 
   render() {
-    const res = JSON.parse(this.reservationDetail)
+    //console.log(this.STATE)
+    //const res = JSON.parse(this.reservationDetail)
+    const res = this.reservationDetail
     return html`<div class="container">
       <div>
         <p class="reserveId">Reservation code: ${res.uuid}</p>

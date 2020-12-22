@@ -1,18 +1,21 @@
 import './feature/app-search-block.js';
 import './feature/app-search-cards';
-import { LitElement, html, customElement, property, css } from 'lit-element';
+import { html, customElement, property, css } from 'lit-element';
 import '../../node_modules/@polymer/paper-card/paper-card.js';
 import '@material/mwc-button';
 import { mainStyle } from './app-styles';
-
-import { connect } from 'pwa-helpers';
-import { store } from './redux/store';
-import { addSearch } from './redux/actions'
+import {BaseView} from './base-view';
 import { RESOURCES_URL, RESTAPI_URL } from './app-config'
 
 
+import { connect } from 'pwa-helpers';
+import { Store } from './redux/store';
+import { addSearch, addReservation } from './redux/actions'
+
+
+
 @customElement('app-home')
-class appLanding extends connect(store)(LitElement) {
+class appLanding extends connect(Store)(BaseView) {
 
   @property()
   searchResult: any;
@@ -78,14 +81,10 @@ class appLanding extends connect(store)(LitElement) {
     this.STATE = state
     this.requestUpdate()
 
-    //this.currentTabId = state.tabId
-    //this.searchResult = state.objects[state.tabId].searchResults
-    //console.log('state changed', state.tabId,state.objects[state.tabId])
   }
 
   async add_search(e: any) {
-    //if (this.searchParams === undefined) {
-    //  this.searchParams = e.detail
+
     const url = Object.keys(e.detail)
       .map(function (k) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(e.detail[k]);
@@ -93,31 +92,12 @@ class appLanding extends connect(store)(LitElement) {
       .join('&');
     const RESTAPI_URL = this.RESTAPI_URL + '/schedule?' + url;
     const searchResult = await fetch(RESTAPI_URL).then(res => res.json());
-    store.dispatch(addSearch(e.detail, searchResult))
+    Store.dispatch(addSearch(e.detail, searchResult))
     //}
   }
 
-  clickReservation(obj: any) {
-
-    const href = 'reservation/' + obj.uuid
-    const _detail_ = {
-      "uuid": obj.uuid,
-      "from": obj.from,
-      "to": obj.to,
-      "date": obj.date,
-      "time": obj.time,
-      "description": obj.description,
-      "vesselId": obj.id,
-      "fare": obj.fare,
-      //  "seats": this.searchParams.passanger
-    }
-
-    window.localStorage.setItem(obj.uuid, JSON.stringify(_detail_))
-    window.location.href = 'reservation/' + obj.uuid
-  }
-
   render() {
-    //console.log(this.STATE)
+
     return html`
       <body>
         <app-search-block id="query-block"
@@ -126,9 +106,8 @@ class appLanding extends connect(store)(LitElement) {
         <app-search-cards
           .tabId=${this.STATE.tabId}
           .searchResult = ${this.STATE.objects[this.STATE.tabId] ?
-        this.STATE.objects[this.STATE.tabId].searchResults : []}
+            this.STATE.objects[this.STATE.tabId].searchResults : []}
           .RESOURCES_URL=${this.RESOURCES_URL}
-          @reserveClicked=${(e: any) => this.clickReservation(e)}
         >
         </app-search-cards>
       </body>

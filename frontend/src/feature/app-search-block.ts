@@ -1,5 +1,5 @@
 import { html, css, LitElement, customElement, property } from 'lit-element';
-import { searchParams, ISearchParams } from '../app-models.js';
+import {ISearchParams, ISearchResult, searchParams } from '../app-models.js';
 import { mainStyle } from '../app-styles';
 //import { } from '../app-models'
 
@@ -33,7 +33,7 @@ export class appSearchBlock extends LitElement {
   constructor() {
     super();
     this.searchParams = new searchParams();
-    this.searchParams.passanger = 1;
+    this.searchParams.passenger = 1;
     this.dteReturnVisible = false;
     this.ports = [];
     this.get_from();
@@ -42,11 +42,6 @@ export class appSearchBlock extends LitElement {
     this.addEventListener;
   }
   
-
-  //stateChanged(state:any) {
-  //  this.ports = []
-  //}
-
   static get styles() {
     {
       return [
